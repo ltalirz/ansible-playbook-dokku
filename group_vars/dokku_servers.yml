@@ -1,0 +1,7 @@
+---
+docker_users:
+  - dokku
+  - ubuntu
+dokku_plugins:
+  - name: acl
+    url: https://github.com/dokku-community/dokku-acl

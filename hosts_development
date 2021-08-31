@@ -1,0 +1,2 @@
+[dokku_servers]
+dev-dokku ansible_host=123.456.96.129 ansible_user=ubuntu
