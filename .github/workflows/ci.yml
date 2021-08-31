@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+env:
+  galaxy-name: "dokku_bot.ansible_dokku"
+
+
+jobs:
+
+  pre-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Install python dependencies
+      run: pip install -r requirements.txt
+    # needed since ansible-lint resolves module names
+    - name: Install role dependencies
+      run: ansible-galaxy install -r requirements.yml
+    - uses: pre-commit/action@v2.0.0
+
+  test:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        distro: [ubuntu2004, debian10]
+      fail-fast: false
+
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - name: Upgrade pip
+      run: |
+        pip install --upgrade pip wheel
+        pip --version
+    - name: Install python dependencies
+      run: pip install -r requirements.txt
+    - name: Install role dependencies
+      run: ansible-galaxy install -r requirements.yml
+    - name: Run playbook
+      run: ansible-playbook playbook.yml -i hosts_local

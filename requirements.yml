@@ -1,2 +1,2 @@
----
-- dokku-bot.ansible-dokku
+roles:
+- src: dokku_bot.ansible_dokku

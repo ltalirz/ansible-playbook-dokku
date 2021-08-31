@@ -1,27 +1,22 @@
----
 - name: apply roles
   hosts: dokku_servers
   roles:
-    # add whatever roles you need
-    - role: dokku_bot.ansible_dokku
-      tags: dokku
-      become: true
-
-- name: provision apps
+  # add whatever roles you need
+  - role: dokku_bot.ansible_dokku
+    tags: dokku
+    become: true
   tasks:
   - name: Create seekpath app
     dokku_clone:
       app: seekpath
       repository: https://github.com/materialscloud-org/tools-seekpath
-      #version: v20.09.1
-    tag: my_dokku_apps
+      # version: v20.09.1
+    tags: my_dokku_apps
 
   - name: Configure ports for seekpath app
     dokku_ports:
       app: seekpath
       mappings:
-        - http:80:80
-        - https:443:80
-      tag: my_dokku_apps
-
-
+      - http:80:80
+      - https:443:80
+    tags: my_dokku_apps
