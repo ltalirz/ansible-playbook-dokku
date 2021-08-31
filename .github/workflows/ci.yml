@@ -30,13 +30,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        distro: [ubuntu2004, debian10]
-      fail-fast: false
-
     steps:
-
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
@@ -51,4 +45,4 @@ jobs:
     - name: Install role dependencies
       run: ansible-galaxy install -r requirements.yml
     - name: Run playbook
-      run: ansible-playbook playbook.yml -i hosts_local
+      run: ansible-playbook playbook.yml -i hosts_local --connection=local
