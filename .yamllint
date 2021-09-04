@@ -15,4 +15,4 @@ rules:
     spaces: 2
     indent-sequences: false
 ignore: |
-  default/roles
+  roles/*

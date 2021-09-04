@@ -10,9 +10,8 @@
     dokku_clone:
       app: seekpath
       repository: https://github.com/materialscloud-org/tools-seekpath
-      # version: v20.09.1
+      version: v21.06.0
     tags: my_dokku_apps
-
   - name: Configure ports for seekpath app
     dokku_ports:
       app: seekpath
@@ -20,3 +19,26 @@
       - http:80:80
       - https:443:80
     tags: my_dokku_apps
+
+  - name: Create apps for dokku users
+    include_tasks: user-single.yml
+    vars:
+      dokku_user: "{{ item }}"
+    with_items: "{{ dokku_users }}"
+    tags: my_dokku_users
+
+  - name: Configure ACLs, set set dokku superuser "{{ my_dokku_superuser }}"
+    become: true
+    lineinfile:
+      path: "~dokku/.dokkurc/acl"
+      line: "{{ item }}"
+      create: true
+      owner: dokku
+      mode: '0644'
+    with_items:
+    - export DOKKU_ACL_ALLOW_COMMAND_LINE=1
+    - export DOKKU_SUPER_USER={{ my_dokku_superuser }}
+      # limit commands that non-superusers can run globally
+    - export DOKKU_ACL_USER_COMMANDS="help version"
+    - export DOKKU_ACL_PER_APP_COMMANDS="logs urls ps:rebuild ps:restart ps:stop ps:start git-upload-pack git-upload-archive git-receive-pack git-hook storage:list proxy:ports proxy:ports-set proxy:report enter config:bundle config:clear config:export config:get config:keys config:set config:unset"  # noqa 204
+    tags: my_dokku_superuser

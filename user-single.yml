@@ -1,0 +1,10 @@
+- name: List apps for user "{{ dokku_user.username }}"
+  command: dokku acl:allowed {{ dokku_user.username }}
+  changed_when: false
+  register: allowed_apps
+
+- name: Process apps for user "{{ dokku_user.username }}"
+  include_tasks: app-single.yml
+  loop_control:
+    loop_var: dokku_app
+  with_items: "{{ dokku_user.apps }}"

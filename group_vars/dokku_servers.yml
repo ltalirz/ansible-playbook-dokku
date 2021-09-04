@@ -1,6 +1,6 @@
-docker_users:
+docker_users:  # users that are allowed to run docker commands
 - dokku
 - ubuntu
-dokku_plugins:
+dokku_plugins:  # dokku plugins to install
 - name: acl
   url: https://github.com/dokku-community/dokku-acl

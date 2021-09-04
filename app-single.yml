@@ -1,0 +1,14 @@
+- name: Create app {{ dokku_app.name }}
+  dokku_app:
+    app: "{{ dokku_app.name }}"
+  when: dokku_app.name not in allowed_apps.stdout_lines
+
+- name: Let user {{ dokku_user.username }} manage app {{ dokku_app.name }}  # noqa 301
+  command: dokku acl:add {{ dokku_app.name }} {{ dokku_user.username }}
+
+- name: Set default resource limits for app {{ dokku_app.name }}  # noqa 301
+  command: >-
+    dokku resource:limit \
+      --memory {{ my_dokku_memory_limit }} \
+      --cpu {{ my_dokku_cpu_limit }} \
+      {{ dokku_app.name }}

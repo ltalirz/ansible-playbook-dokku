@@ -1,0 +1,14 @@
+dokku_vhost_enable: 'true'
+
+# app-level resource limits
+my_dokku_cpu_limit: 2  # max. number of CPUs per app
+my_dokku_memory_limit: 4G # max. memory per app in GBytes
+
+dokku_users:
+- username: ltalirz
+  email: lt@gmail.com
+  ssh_key: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQChkphp/4wgTnVrYNuyE6eVNcMFzOZwglj4cP8IAtZwEde8y3KwKEHX6jG3j2tFiV9EGS+7aLVqXsHf/OFTHjad54OEafG5/BR/c2dVhk7dOGhPTCvZza8fX/9IyZiYRRBGx2lH4Y9ypSJyQ/6QzpgCe0Qd9zqnVWrqyY4ny+vsuGiSp+QWPNs0YD+tmvmPh1RvMxWdWMKGXt1QLscN3azRUl140wWLK3uAc85tqgyGCAFxOK8rOpok8GoypD2CRBNfyyislUWE+OGXxdhwOwaYEbj9vScTiMDPuEDgXpoKEaEPnMh5axmy38IXOoNhnndwwLzqiIs6ssiYUOjvmqgD"  # noqa
+  apps:
+  - name: seekpath
+  - name: oximachine
+  - name: mofchecker
