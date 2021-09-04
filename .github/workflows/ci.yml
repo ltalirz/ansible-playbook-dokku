@@ -44,5 +44,5 @@ jobs:
       run: pip install -r requirements.txt
     - name: Install role dependencies
       run: ansible-galaxy install -r requirements.yml
-    - name: Run playbook
-      run: ansible-playbook playbook.yml -i hosts_local --connection=local
+    - name: Run playbook on localhost
+      run: ansible-playbook playbook.yml -i .github/hosts_local --connection=local

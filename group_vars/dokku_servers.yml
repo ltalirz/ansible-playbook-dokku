@@ -4,5 +4,3 @@ docker_users:
 dokku_plugins:
 - name: acl
   url: https://github.com/dokku-community/dokku-acl
-- name: clone
-  url: https://github.com/crisward/dokku-clone.git
