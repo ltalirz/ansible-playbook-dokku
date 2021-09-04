@@ -27,7 +27,7 @@
     with_items: "{{ dokku_users }}"
     tags: my_dokku_users
 
-  - name: Configure ACLs, set set dokku superuser "{{ my_dokku_superuser }}"
+  - name: Configure ACLs, set set dokku superuser
     become: true
     lineinfile:
       path: "~dokku/.dokkurc/acl"
@@ -37,8 +37,10 @@
       mode: '0644'
     with_items:
     - export DOKKU_ACL_ALLOW_COMMAND_LINE=1
-    - export DOKKU_SUPER_USER={{ my_dokku_superuser }}
-      # limit commands that non-superusers can run globally
+    # 'default' is the dokku user associated with logging in via SSH
+    # You can pick any other dokku user configured
+    # - export DOKKU_SUPER_USER=' default'
+    # limit commands that non-superusers can run globally
     - export DOKKU_ACL_USER_COMMANDS="help version"
     - export DOKKU_ACL_PER_APP_COMMANDS="logs urls ps:rebuild ps:restart ps:stop ps:start git-upload-pack git-upload-archive git-receive-pack git-hook storage:list proxy:ports proxy:ports-set proxy:report enter config:bundle config:clear config:export config:get config:keys config:set config:unset"  # noqa 204
     tags: my_dokku_superuser
