@@ -24,16 +24,16 @@
     dokku_config:
       app: '--global'
       config:
-        DOKKU_ACL_ALLOW_COMMAND_LINE: 1
+        DOKKU_ACL_ALLOW_COMMAND_LINE: "1"
         DOKKU_ACL_USER_COMMANDS: "help version"
         # 'default' is the dokku user associated with logging in via SSH
         # You can pick any other user known to dokku to be the superuser.
         # DOKKU_SUPER_USER: 'default'
         DOKKU_ACL_PER_APP_COMMANDS: "logs urls ps:rebuild ps:restart ps:stop ps:start git-upload-pack git-upload-archive git-receive-pack git-hook storage:list proxy:ports proxy:ports-set proxy:report enter config:bundle config:clear config:export config:get config:keys config:set config:unset"  # noqa 204
         # Contact email for Let's Encrypt SSL certificates
-        DOKKU_LETSENCRYPT_EMAIL: me@provider.net
+        DOKKU_LETSENCRYPT_EMAIL: "me@provider.net"
         # Comment the line below to use the Let's Encrypt production server
-        DOKKU_LETSENCRYPT_SERVER: staging
+        DOKKU_LETSENCRYPT_SERVER: "staging"
 
   - name: Create apps for dokku users
     include_tasks: user-single.yml
