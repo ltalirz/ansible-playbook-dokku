@@ -1,3 +1,4 @@
+dokku_vhost_enable: 'true'  # use vhost-based deployments
 docker_users:  # users that are allowed to run docker commands
 - dokku
 - ubuntu

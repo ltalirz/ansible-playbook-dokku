@@ -1,4 +1,5 @@
-dokku_vhost_enable: 'true'
+# Serve apps under appname.dokku.me
+dokku_hostname: dokku.me
 
 # app-level resource limits
 my_dokku_cpu_limit: 2  # max. number of CPUs per app
