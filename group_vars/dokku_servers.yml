@@ -4,3 +4,5 @@ docker_users:  # users that are allowed to run docker commands
 dokku_plugins:  # dokku plugins to install
 - name: acl
   url: https://github.com/dokku-community/dokku-acl
+- name: letsencrypt
+  url: https://github.com/dokku/dokku-letsencrypt

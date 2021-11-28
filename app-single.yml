@@ -14,3 +14,7 @@
     resources:
       cpu: "{{ my_dokku_cpu_limit }}"
       memory: "{{ my_dokku_memory_limit }}"
+
+- name: Configure SSL for app {{ dokku_app.name }}  # noqa 301
+  dokku_letsencrypt:
+    app: "{{ dokku_app.name }}"
